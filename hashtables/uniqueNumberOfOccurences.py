@@ -20,7 +20,7 @@ Output: true
 
 
 class Solution:
-    def uniqueOccurrences(self, arr: List[int]) -> bool:
+    def uniqueOccurrences(self, arr) -> bool:
         my_dict = {}
         seen = set()
 
