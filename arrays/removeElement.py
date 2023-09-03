@@ -5,7 +5,6 @@ The function should not allocate extra space for another list; instead, it shoul
 '''
 
 def remove_element(nums, val):
-    print("yeee", nums)
     n = len(nums)
     index = 0
     removed = 0
