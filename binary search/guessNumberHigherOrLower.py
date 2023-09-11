@@ -38,7 +38,6 @@ Output: 1
 ############ Binary search --- Time: O(Log2n) Space: O(1) ###############
 class Solution:
     def guessNumber(self, n: int) -> int:
-        ### Binary search --- Time: O(Log2n) Space: O(1)
         left = 1
         right = n
         
@@ -56,7 +55,6 @@ class Solution:
 ############ Ternary search --- Time O(Log3n) Space: O(1) #################
 class Solution1:
     def guessNumber(self, n: int) -> int:
-        
         left = 1
         right = n
 
