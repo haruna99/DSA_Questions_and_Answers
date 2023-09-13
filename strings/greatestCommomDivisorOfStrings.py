@@ -20,6 +20,7 @@ Output: ""
 '''
 
 ######################### O(m+n) ############################
+from math import gcd
 class Solution1:
     def gcdOfStrings(self, str1: str, str2: str) -> str:
         
@@ -30,7 +31,6 @@ class Solution1:
         return str1[:max_length]
 
 ###############  O(min(n,m)*(m+n)) ##################
-from math import gcd
 class Solution1:
     def gcdOfStrings(self, str1: str, str2: str) -> str:
         
