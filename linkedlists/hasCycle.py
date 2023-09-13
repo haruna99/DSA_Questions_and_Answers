@@ -1,72 +1,51 @@
-#Write a method called has_loop that is part of the linked list class.
+'''
+Given head, the head of a linked list, determine if the linked list has a cycle in it.
 
-#The method should be able to detect if there is a cycle or loop present in the linked list.
+There is a cycle in a linked list if there is some node in the list that can be reached again by continuously following the next pointer. Internally, pos is used to denote the index of the node that tail's next pointer is connected to. Note that pos is not passed as a parameter.
 
-#The method should utilize Floyd's cycle-finding algorithm, also known as the "tortoise and hare" algorithm, to determine the presence of a loop efficiently.
+Return true if there is a cycle in the linked list. Otherwise, return false.
+
+ 
+
+Example 1:
 
 
-class Node:
-    def __init__(self, value):
-        self.value = value
-        self.next = None
-        
-class LinkedList:
-    def __init__(self, value):
-        new_node = Node(value)
-        self.head = new_node
-        self.tail = new_node
-        self.length = 1
+Input: head = [3,2,0,-4], pos = 1
+Output: true
+Explanation: There is a cycle in the linked list, where the tail connects to the 1st node (0-indexed).
+Example 2:
 
-    def append(self, value):
-        new_node = Node(value)
-        if self.length == 0:
-            self.head = new_node
-            self.tail = new_node
-        else:
-            self.tail.next = new_node
-            self.tail = new_node
-        self.length += 1
-        return True
 
-    def has_loop(self):
-        if self.head.next is None:
+Input: head = [1,2], pos = 0
+Output: true
+Explanation: There is a cycle in the linked list, where the tail connects to the 0th node.
+Example 3:
+
+
+Input: head = [1], pos = -1
+Output: false
+Explanation: There is no cycle in the linked list.
+'''
+
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.next = None
+
+class Solution:
+    def hasCycle(self, head):
+        if not head or head.next is None:
             return False
-        slow = self.head
-        fast = self.head
-        while True:
-            slow = slow.next
+        
+        slow = head
+        fast = head
+
+        while fast and fast.next:
             fast = fast.next.next
+            slow = slow.next
+
             if slow == fast:
                 return True
-            if fast is None or fast.next is None:
-                return False
-            
-    
-    
-    
-    
-my_linked_list_1 = LinkedList(1)
-my_linked_list_1.append(2)
-my_linked_list_1.append(3)
-my_linked_list_1.append(4)
-my_linked_list_1.tail.next = my_linked_list_1.head
-print(my_linked_list_1.has_loop() ) # Returns True
 
-
-
-
-my_linked_list_2 = LinkedList(1)
-my_linked_list_2.append(2)
-my_linked_list_2.append(3)
-my_linked_list_2.append(4)
-print(my_linked_list_2.has_loop() ) # Returns False
-
-
-
-"""
-    EXPECTED OUTPUT:
-    ----------------
-    True
-    False
-    
-"""
+        return False

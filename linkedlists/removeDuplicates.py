@@ -1,97 +1,56 @@
-"""
-You are given a singly linked list that contains integer values, where some of these values may be duplicated.
+'''Given the head of a sorted linked list, delete all duplicates such that each element appears only once. Return the linked list sorted as well.
 
-Note: this linked list class does not have a tail which will make this method easier to implement.
+ 
 
-Your task is to implement a method called remove_duplicates() within the LinkedList class that removes all duplicate values from the list.
-
-Your method should not create a new list, but rather modify the existing list in-place, preserving the relative order of the nodes.
-
-"""
-
-class Node:
-    def __init__(self, value):
-        self.value = value
-        self.next = None
-        
-class LinkedList:
-    def __init__(self, value):
-        new_node = Node(value)
-        self.head = new_node
-        self.length = 1
-        
-    def print_list(self):
-        temp = self.head
-        while temp is not None:
-            print(temp.value)
-            temp = temp.next  
-            
-    def print_all(self):
-        if self.length == 0:
-            print("Head: None")
-        else:
-            print("Head: ", self.head.value)
-        print("Length: ", self.length)
-        print("\nLinked List:")
-        if self.length == 0:
-            print("empty")
-        else:
-            self.print_list()
-
-    def append(self, value):
-        new_node = Node(value)
-        if self.length == 0:
-            self.head = new_node
-        else:
-            current = self.head
-            while current.next is not None:
-                current = current.next
-            current.next = new_node
-        self.length += 1
+Example 1:
 
 
-    def remove_duplicates(self):
-        
-        temp = self.head
-        prev = self.head
-        values = set()
-        while temp:
-            if not temp.value in values:
-                values.add(temp.value)
-                prev = temp
+Input: head = [1,1,2]
+Output: [1,2]
+Example 2:
+
+
+Input: head = [1,1,2,3,3]
+Output: [1,2,3]
+'''
+
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+############################ Time: O(n)  Space: O(1) ################################
+class Solution:
+    def deleteDuplicates(self, head):
+        if not head or not head.next:
+            return head
+
+        temp = head
+        while temp and temp.next:
+            if temp.val == temp.next.val:
+                temp.next = temp.next.next
             else:
-                self.length -= 1
+                temp = temp.next
+            
+
+        return head
+
+############################ Time: O(n)  Space: O(n) ################################
+class Solution:
+    def deleteDuplicates(self, head):
+        if not head or not head.next:
+            return head
+
+        prev = head
+        temp = prev.next
+
+        seen = {prev.val}
+        while temp:
+            if temp.val not in seen:
+                prev.next = temp
+                prev = temp
+            seen.add(temp.val)
             temp = temp.next
-            prev.next = temp
-                
-    
+        prev.next = temp
 
-
-
-my_linked_list = LinkedList(1)
-my_linked_list.append(1)
-my_linked_list.append(1)
-my_linked_list.append(2)
-my_linked_list.append(3)
-my_linked_list.append(3)
-my_linked_list.append(2)
-my_linked_list.append(4)
-my_linked_list.remove_duplicates()
-
-my_linked_list.print_all()
-
-
-
-
-"""
-    EXPECTED OUTPUT:
-    ----------------
-    Head:  1
-    Length:  4
-    Linked List:
-    1
-    2
-    3
-    4
-    
-"""
+        return head
